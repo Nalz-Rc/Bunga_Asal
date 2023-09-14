@@ -1,0 +1,688 @@
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin-top: 50px;
+}
+
+h1 {
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-family: 'Rubik Iso', cursive;
+  cursor: default;
+  font-size: 50px;
+  color: #ffffff;
+}
+
+h1 span {
+  transition: .5s linear
+}
+
+h1:hover span:nth-child(1) {
+  margin-right: 5px
+}
+
+h1:hover span:nth-child(1):after {
+  content: "kukator";
+}
+
+h1:hover span:nth-child(2) {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+h1:hover span:nth-child(2):after {
+  content: "tung";
+}
+
+h1:hover span:nth-child(3) {
+  margin-left: 5px;
+}
+
+h1:hover span:nth-child(3):after {
+  content: "segi";
+}
+
+h1:hover span {
+  color: #21fbf8f7;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.747);
+}
+
+.card {
+  width: auto;
+  height: auto;
+  margin-top: 100px;
+  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 100px;
+  margin: 80px;
+  text-align: center;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0.5px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #fff;
+}
+
+svg text {
+  font-family: Lora;
+  letter-spacing: 5px;
+  stroke: #ffffff;
+  font-size: 70px;
+  font-weight: 700;
+  stroke-width: 3;
+  animation: textAnimate 5s infinite alternate;
+  cursor: default;
+}
+
+@keyframes textAnimate {
+  0% {
+    stroke-dasharray: 0 50%;
+    stroke-dashoffset: 20%;
+    fill: #9DB2BF;;
+  }
+
+  100% {
+    stroke-dasharray: 50% 0;
+    stroke-dashoffstet: -20%;
+    fill: #9DB2BF;
+  }
+
+}
+
+/* ini adalah text hai selamat datang  */
+.text_singkat {
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+  color: #ffffff;
+  cursor: default;
+}
+
+/* ini adalah gambar persegi */
+.square {
+  width: 200px;
+  /* Ubah ukuran sesuai kebutuhan Anda */
+  height: 200px;
+  /* Ubah ukuran sesuai kebutuhan Anda */
+  border: 2px solid #ff0000;
+  margin: 50px auto;
+  position: relative;
+}
+
+.corner {
+  position: absolute;
+  width: 20px;
+  /* Ukuran sudut A, B, C, dan D */
+  height: 20px;
+  /* Ukuran sudut A, B, C, dan D */
+  color: #ffffff;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.corner-a {
+  top: -17px;
+  left: -17px;
+}
+
+.corner-b {
+  top: -17px;
+  right: -17px;
+}
+
+.corner-c {
+  bottom: -17px;
+  left: -17px;
+}
+
+.corner-d {
+  bottom: -17px;
+  right: -17px;
+}
+
+.card-box {
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-right-color: rgba(255, 255, 255, 0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  /* Tambahkan ruang padding untuk card */
+  margin-top: 10px;
+  /* Tambahkan jarak di atas card */
+  height: 900px;
+  margin-left: 100px;
+  margin-right: 100px;
+  display: flex;
+  flex-direction: column;
+  /* Mengatur konten ke arah kolom */
+  min-height: 900px;
+}
+
+/* Ini adalah Background */
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+}
+
+@keyframes fall {
+  to {
+    transform: translate3d(-30em, 0, 0);
+  }
+}
+
+@keyframes tail-fade {
+  0%, 50% {
+    width: var(--star-tail-length);
+    opacity: 1;
+  }
+
+  70%, 80% {
+    width: 0;
+    opacity: 0.4;
+  }
+
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  transform: rotate(-45deg);
+  z-index: -9999;
+}
+
+.star {
+  --star-count: 50;
+  --star-color: var(--primary-color);
+  --star-tail-length: 6em;
+  --star-tail-height: 2px;
+  --star-width: calc(var(--star-tail-length) / 3);
+  --fall-duration: 9s;
+  --tail-fade-duration: var(--fall-duration);
+  position: absolute;
+  top: var(--top-offset);
+  left: 0;
+  width: var(--star-tail-length);
+  height: var(--star-tail-height);
+  color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(45deg, currentColor, transparent);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 6px currentColor);
+  transform: translate3d(104em, 0, 0);
+  animation: fall var(--fall-duration) var(--fall-delay) linear infinite, tail-fade var(--tail-fade-duration) var(--fall-delay) ease-out infinite;
+}
+
+.star:nth-child(1) {
+  --star-tail-length: 2em;
+  --top-offset: 10vh;
+  --fall-duration: 9.1s;
+  --fall-delay: 0.1s;
+}
+
+.star:nth-child(2) {
+  --star-tail-length: 4em;
+  --top-offset: 20vh;
+  --fall-duration: 9.2s;
+  --fall-delay: 0.2s;
+}
+
+/* Tambahkan aturan untuk setiap bintang sampai ke-50 */
+
+.star::before,
+.star::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: calc(var(--star-width) / -2);
+  width: var(--star-width);
+  height: 100%;
+  background: linear-gradient(45deg, transparent, currentColor, transparent);
+  border-radius: inherit;
+  animation: blink 2s linear infinite;
+}
+
+.star::before {
+  transform: rotate(45deg);
+}
+
+.star::after {
+  transform: rotate(-45deg);
+}
+
+
+/* selesai*/
+
+
+/* ini untuk button */
+
+.btn-cont {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+
+  .btn {
+    margin: 10px;
+    position: relative;
+    padding: 20px 50px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 15px;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    -webkit-font-smoothing: antialiased;
+
+    &:hover {
+      border: none;
+
+      .line-1 {
+        animation: move1 1500ms infinite ease;
+      }
+
+      .line-2 {
+        animation: move2 1500ms infinite ease;
+      }
+
+      .line-3 {
+        animation: move3 1500ms infinite ease;
+      }
+
+      .line-4 {
+        animation: move4 1500ms infinite ease;
+      }
+    }
+  }
+
+  .line-1 {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1px;
+    background-color: rgb(0, 234, 255);
+    left: 0;
+    bottom: 0;
+  }
+
+  .line-2 {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1px;
+    background-color: rgb(0, 234, 255);
+    left: 0;
+    top: 0;
+  }
+
+  .line-3 {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1px;
+    background-color: rgb(0, 234, 255);
+    right: 0;
+    top: 0;
+  }
+
+  .line-4 {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1px;
+    background-color: rgb(0, 234, 255);
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@keyframes move1 {
+  0% {
+    height: 100%;
+    bottom: 0;
+  }
+
+  54% {
+    height: 0;
+    bottom: 100%;
+  }
+
+  55% {
+    height: 0;
+    bottom: 0;
+  }
+
+  100% {
+    height: 100%;
+    bottom: 0;
+  }
+}
+
+@keyframes move2 {
+  0% {
+    width: 0;
+    left: 0;
+  }
+
+  50% {
+    width: 100%;
+    left: 0;
+  }
+
+  100% {
+    width: 0;
+    left: 100%;
+  }
+}
+
+@keyframes move3 {
+  0% {
+    height: 100%;
+    top: 0;
+  }
+
+  54% {
+    height: 0;
+    top: 100%;
+  }
+
+  55% {
+    height: 0;
+    top: 0;
+  }
+
+  100% {
+    height: 100%;
+    top: 0;
+  }
+}
+
+@keyframes move4 {
+  0% {
+    width: 0;
+    right: 0;
+  }
+
+  55% {
+    width: 100%;
+    right: 0;
+  }
+
+  100% {
+    width: 0;
+    right: 100%;
+  }
+}
+
+.card-keliling {
+  width: 100px;
+}
+
+.card-luas {
+  width: 100px;
+}
+
+/* Teks Keliling */
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+.waviy {
+  position: relative;
+  -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0, 0, 0, .2));
+  font-size: 50px;
+  margin-top: 30px;
+}
+
+.waviy span {
+  font-family: 'Alfa Slab One', cursive;
+  position: relative;
+  display: inline-block;
+  color: #ffffffc7;
+  text-transform: uppercase;
+  animation: waviy 1s infinite;
+  animation-delay: calc(.1s * var(--i));
+
+}
+
+@keyframes waviy {
+
+  0%,
+  40%,
+  100% {
+    transform: translateY(0)
+  }
+
+  20% {
+    transform: translateY(-20px)
+  }
+}
+
+/* sampe sini saja teks keliling */
+
+/* ini adalah inputan */
+
+.input-group {
+  position: relative;
+  width: max-content;
+  margin: 0 auto;
+  padding-top: 3px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 17px;
+}
+
+.input {
+  border: solid 1.5px #9e9e9e;
+  border-radius: 1rem;
+  background: none;
+  padding: 1rem;
+  font-size: 1rem;
+  color: #f5f5f5;
+  transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.user-label {
+  position: absolute;
+  left: 15px;
+  color: #e8e8e8;
+  pointer-events: none;
+  transform: translateY(1rem);
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input:focus,
+input:valid {
+  outline: none;
+  border: 1.5px solid #21fbf8f7;
+}
+
+.input:focus~label,
+input:valid~label {
+  transform: translateY(-50%) scale(0.8);
+  background-color: rgb(255, 255, 255);
+  padding: 0.2rem;
+  color: #000000;
+
+}
+
+/* selesai sampai sini */
+
+/* ini adalah teks hasil perhitungan */
+
+.hasil-perhitungan {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  position: relative; /* Tambahkan properti position */
+  padding-top: 20px;
+}
+.hasil-perhitungan h3 {
+  margin-bottom: 10px; /* Sesuaikan dengan jarak yang Anda inginkan */
+  font-size: 30px;
+  margin-top: 10px;
+}
+.hasil-container {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  border: 2px solid #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 300px; /* Atur lebar kotak sesuai kebutuhan */
+  height: 200px; /* Atur tinggi kotak sesuai kebutuhan */
+  text-align: left;
+  color: #fff;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+.hasil-box {
+  text-align: center;
+  
+}
+
+/* button submit */
+.btn-submit{
+  position: relative;
+  padding: 1rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  font-size: 15px;
+  width: max-content;
+  margin: 0 auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: 'Yantramanav', sans-serif;
+  color: #f5f5f5;
+  margin-right: 15px;
+}
+.btn-submit::after,
+.btn-submit::before{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    border: 3px solid;
+    transition: all 0.6s ease;
+    border-radius: 2px;
+}
+.btn-submit::after{
+    bottom: 0;
+    right: 0;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: rgb(255, 255, 255);
+    border-right-color: rgb(0, 234, 255);
+}
+.btn-submit::before{
+    top: 0;
+    left: 0;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    border-top-color: rgb(0, 234, 255);
+    border-left-color: rgb(255, 255, 255);
+}
+.btn-submit:hover:after,
+.btn-submit:hover:before{
+    border-bottom-color: rgb(255, 255, 255);
+    border-right-color: rgb(0, 234, 255);
+    border-top-color: rgb(0, 234, 255);
+    border-left-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+}
+/* button reset */
+.btn-reset{
+  position: relative;
+  padding: 1rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  font-size: 15px;
+  width: max-content;
+  margin: 0 auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: 'Yantramanav', sans-serif;
+  color: #f5f5f5;
+  margin-left: 15px;
+}
+.btn-reset::after,
+.btn-reset::before{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    border: 3px solid;
+    transition: all 0.6s ease;
+    border-radius: 2px;
+}
+.btn-reset::after{
+    bottom: 0;
+    right: 0;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: rgb(255, 255, 255);
+    border-right-color: rgb(0, 234, 255);
+}
+.btn-reset::before{
+    top: 0;
+    left: 0;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    border-top-color: rgb(0, 234, 255);
+    border-left-color: rgb(255, 255, 255);
+}
+.btn-reset:hover:after,
+.btn-reset:hover:before{
+    border-bottom-color: rgb(255, 255, 255);
+    border-right-color: rgb(0, 234, 255);
+    border-top-color: rgb(0, 234, 255);
+    border-left-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+}
+
+.button-all{
+  display: inline-block;
+}
+/* selesai */
